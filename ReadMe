@@ -1,0 +1,598 @@
+# Offensive Security Learning Lab
+
+![Security Research Banner](https://img.shields.io/badge/Purpose-Educational%20Only-brightgreen)
+![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)
+![Python](https://img.shields.io/badge/Language-Python-blue)
+![C](https://img.shields.io/badge/Language-C-blue)
+![JavaScript](https://img.shields.io/badge/Language-JavaScript-yellow)
+![Assembly](https://img.shields.io/badge/Language-Assembly-darkblue)
+
+---
+
+## ⚠️ CRITICAL DISCLAIMER
+
+**THIS REPOSITORY AND ALL CONTENTS HEREIN ARE STRICTLY FOR EDUCATIONAL AND RESEARCH PURPOSES ONLY.**
+
+By accessing, cloning, or using any material in this repository, you acknowledge and agree to the following terms:
+
+1. **LEGAL USE ONLY**: All code, scripts, and techniques contained here must only be used on systems you own or have explicit written permission to test. Unauthorized access to computer systems is illegal under laws including but not limited to the Computer Fraud and Abuse Act (CFAA) in the US, the Computer Misuse Act in the UK, and similar legislation worldwide.
+
+2. **PERSONAL LEARNING**: The author created this repository as part of a structured learning journey to understand offensive security concepts for the purpose of becoming a better defender. It is not intended to enable, facilitate, or encourage any illegal or unethical activity.
+
+3. **NO WARRANTY**: All material is provided "AS IS" without warranty of any kind. The author assumes no liability for any misuse, damages, or legal consequences arising from the use of this material.
+
+4. **YOUR RESPONSIBILITY**: As someone interested in security, you have an ethical and legal responsibility to use this knowledge only for good — to protect systems, not harm them. With great power comes great responsibility.
+
+5. **IMMEDIATE TAKEDOWN**: If you are a law enforcement agency or legal authority and believe any content herein violates applicable law, please contact the repository owner immediately for resolution.
+
+---
+
+## 📋 Table of Contents
+
+- [Mission Statement](#-mission-statement)
+- [Learning Philosophy](#-learning-philosophy)
+- [Lab Environment Setup](#-lab-environment-setup)
+- [Repository Structure](#-repository-structure)
+- [Programming Languages Covered](#-programming-languages-covered)
+- [Core Learning Modules](#-core-learning-modules)
+- [Tools & Frameworks](#-tools--frameworks)
+- [Prerequisites](#-prerequisites)
+- [Getting Started](#-getting-started)
+- [Safety Protocols](#-safety-protocols)
+- [Documentation Standards](#-documentation-standards)
+- [Contributing](#-contributing)
+- [Recommended Resources](#-recommended-resources)
+- [Acknowledgments](#-acknowledgments)
+- [License](#-license)
+
+---
+
+## 🎯 Mission Statement
+
+This repository documents a comprehensive journey into offensive security and malicious code analysis, with one singular goal: **to become a formidable defender by understanding the attacker's mindset and toolkit.**
+
+In the cybersecurity industry, we have a saying: *"To catch a hacker, you must think like a hacker."* This project embodies that philosophy. By learning how attacks work at the code level, we can:
+
+- Build more secure applications from the ground up
+- Implement effective detection and prevention mechanisms
+- Conduct thorough security assessments and penetration tests
+- Contribute to a safer digital ecosystem
+- Pursue careers in security research, penetration testing, or defense
+
+**This is not about breaking things. It's about understanding how things break so we can make them stronger.**
+
+---
+
+## 🧠 Learning Philosophy
+
+This project is built on five core principles:
+
+| Principle | Application |
+|-----------|-------------|
+| **Ethical Foundation First** | Every module begins with a discussion of ethical boundaries and legal implications |
+| **Hands-On, Practical Learning** | Theory is immediately applied in isolated lab environments |
+| **Defense Through Offense** | Each attack technique is analyzed for its defensive implications |
+| **Documentation as Learning** | Thorough documentation of findings, not just code |
+| **Community & Responsibility** | Sharing defensive insights, never attack vectors |
+
+---
+
+## 🖥️ Lab Environment Setup
+
+All testing and development occurs exclusively in isolated, controlled environments. Here is my complete lab setup:
+
+### Hardware
+- **Primary Machine**: [Your specs - e.g., Dell XPS 15, 32GB RAM, 1TB SSD]
+- **Testing Devices**: 
+  - 2x Raspberry Pi 4 (for network testing)
+  - 1x Old Android phone (physical testing device)
+  - 1x Old laptop dedicated to testing
+
+### Virtualization
+- **Hypervisor**: VirtualBox 7.0+, VMware Workstation Player
+- **Isolated Network**: All VMs connected via host-only/internal network
+- **No internet access** for target machines unless explicitly required and firewalled
+
+### Target Machines (VMs)
+| VM Name | Purpose | Access |
+|---------|---------|--------|
+| **Kali Linux** | Attacker machine, penetration testing tools | https://www.kali.org/get-kali/ |
+| **Metasploitable 3** | Deliberately vulnerable Linux target | https://github.com/rapid7/metasploitable3 |
+| **Metasploitable 2** | Legacy vulnerable Linux target | https://sourceforge.net/projects/metasploitable/ |
+| **Windows 10 (Unpatched)** | Testing Windows-specific attacks | Own license |
+| **Windows 11 (Patched)** | Testing modern defenses | Own license |
+| **Ubuntu Server 22.04** | Linux server testing | https://ubuntu.com/download/server |
+| **Android Emulator (AVD)** | Mobile testing | Android Studio |
+| **DVWA** | Damn Vulnerable Web Application | https://github.com/digininja/DVWA |
+| **OWASP WebGoat** | Web application security training | https://github.com/WebGoat/WebGoat |
+| **Javulna** | Vulnerable Java application | https://github.com/ardhiansyah-id/javulna |
+
+---
+
+## 📁 Repository Structure
+
+```
+offensive-security-lab/
+│
+├── README.md                       # This file
+├── LICENSE                          # Creative Commons BY-NC 4.0
+├── .gitignore                       # Ignore binaries, credentials, etc.
+│
+├── docs/                            # Comprehensive documentation
+│   ├── ethics/                      # Ethical frameworks and guidelines
+│   │   ├── responsible-disclosure.md
+│   │   ├── legal-boundaries.md
+│   │   └── professional-ethics.md
+│   │
+│   ├── lab-setup/                   # Detailed lab configuration
+│   │   ├── virtualbox-network-setup.md
+│   │   ├── android-testing-env.md
+│   │   └── vm-snapshots-guide.md
+│   │
+│   ├── methodologies/               # Attack and defense frameworks
+│   │   ├── penetration-testing-stages.md
+│   │   ├── reconnaissance-guide.md
+│   │   └── privilege-escalation.md
+│   │
+│   ├── writeups/                    # Detailed analysis of exercises
+│   │   ├── dvwa-sql-injection.md
+│   │   ├── buffer-overflow-walkthrough.md
+│   │   └── xss-payload-analysis.md
+│   │
+│   └── references/                  # External resources and citations
+│       ├── books.md
+│       ├── courses.md
+│       └── papers.md
+│
+├── languages/                        # Language-specific learning
+│   ├── javascript/
+│   │   ├── README.md                # JavaScript for security
+│   │   ├── xss-payloads/
+│   │   │   ├── basic-alert.js
+│   │   │   ├── cookie-stealer.js
+│   │   │   └── keylogger-poc.js
+│   │   ├── dom-manipulation/
+│   │   └── browser-security-bypass/
+│   │
+│   ├── python/
+│   │   ├── README.md                # Python for security automation
+│   │   ├── network-tools/
+│   │   │   ├── port-scanner.py
+│   │   │   ├── packet-crafter.py
+│   │   │   └── arp-spoofer.py
+│   │   ├── exploit-dev/
+│   │   │   ├── buffer-overflow-template.py
+│   │   │   └── fuzzer.py
+│   │   ├── backdoors/
+│   │   │   ├── reverse-shell.py
+│   │   │   └── bind-shell.py
+│   │   └── malware-analysis/
+│   │       └── static-analysis-tools/
+│   │
+│   ├── c/
+│   │   ├── README.md                # C for low-level exploitation
+│   │   ├── memory/
+│   │   │   ├── vulnerable-programs/
+│   │   │   └── exploit-examples/
+│   │   ├── shellcode/
+│   │   │   ├── basic-shellcode.asm
+│   │   │   └── shellcode-loader.c
+│   │   └── reverse-engineering/
+│   │
+│   ├── sql/
+│   │   ├── README.md                # SQL injection techniques
+│   │   ├── injection-payloads/
+│   │   ├── bypass-techniques/
+│   │   └── database-fingerprinting/
+│   │
+│   ├── java/
+│   │   ├── README.md                # Java security
+│   │   ├── deserialization/
+│   │   ├── android/
+│   │   │   ├── malicious-apk-poc/
+│   │   │   └── permission-exploration/
+│   │   └── applet-vulnerabilities/
+│   │
+│   ├── bash-powershell/
+│   │   ├── README.md                # Scripting for post-exploitation
+│   │   ├── windows/
+│   │   │   ├── persistence.ps1
+│   │   │   ├── enumeration.ps1
+│   │   │   └── log-cleaner.ps1
+│   │   └── linux/
+│   │       ├── persistence.sh
+│   │       └── enumeration.sh
+│   │
+│   └── assembly/
+│       ├── README.md                # Low-level reverse engineering
+│       ├── x86-basics/
+│       └── reversing-exercises/
+│
+├── attack-lifecycle/                 # Complete attack chain simulations
+│   ├── 01-reconnaissance/
+│   │   ├── passive/
+│   │   └── active/
+│   ├── 02-initial-access/
+│   │   ├── drive-by-download/
+│   │   ├── phishing-template/
+│   │   └── exploit-delivery/
+│   ├── 03-privilege-escalation/
+│   │   ├── windows/
+│   │   └── linux/
+│   ├── 04-persistence/
+│   │   ├── backdoors/
+│   │   └── rootkits/
+│   ├── 05-lateral-movement/
+│   └── 06-cover-tracks/
+│
+├── defense/                           # Defensive countermeasures
+│   ├── detection/
+│   │   ├── yara-rules/
+│   │   ├── snort-rules/
+│   │   └── sigma-rules/
+│   ├── prevention/
+│   │   ├── secure-coding-guides/
+│   │   └── hardening-scripts/
+│   └── analysis/
+│       ├── malware-sandbox/
+│       └── forensics/
+│
+├── tools/                             # Custom tools (educational only)
+│   ├── network-scanner/
+│   ├── payload-generator/
+│   └── lab-manager/
+│
+└── scripts/                           # Utility scripts for lab management
+    ├── snapshot-all-vms.sh
+    ├── reset-lab-network.sh
+    └── isolate-target-vms.sh
+```
+
+---
+
+## 🔧 Programming Languages Covered
+
+| Language | Focus Area | Defensive Application |
+|----------|------------|----------------------|
+| **JavaScript** | XSS, client-side attacks, browser exploitation | Secure coding, CSP implementation, input validation |
+| **Python** | Automation, network tools, exploit dev, backdoors | Tool development, security automation, malware analysis |
+| **C** | Buffer overflows, memory corruption, shellcode | Secure memory management, compiler protections |
+| **SQL** | Injection attacks, database exploitation | Parameterized queries, ORM security |
+| **Java** | Deserialization, Android malware, applet attacks | Secure deserialization, Android permissions |
+| **Bash/PowerShell** | Post-exploitation, persistence, enumeration | Log analysis, threat hunting, automation |
+| **Assembly** | Reverse engineering, rootkit analysis | Malware reverse engineering, exploit analysis |
+
+---
+
+## 📚 Core Learning Modules
+
+### Module 1: Ethical & Legal Foundation
+- Understanding computer crime laws
+- Responsible disclosure frameworks
+- Setting up an isolated lab legally
+- Documentation best practices for security research
+
+### Module 2: Reconnaissance
+- Passive information gathering
+- Network scanning techniques
+- OS fingerprinting
+- Service enumeration
+- **Language application**: Python for automated scanners
+
+### Module 3: Web Application Attacks
+- Cross-Site Scripting (XSS)
+- SQL Injection
+- Cross-Site Request Forgery (CSRF)
+- Session hijacking
+- **Language application**: JavaScript for payloads, Python for automation
+
+### Module 4: System Exploitation
+- Buffer overflows
+- Format string vulnerabilities
+- Race conditions
+- Privilege escalation techniques
+- **Language application**: C for low-level exploits, Python for exploit dev
+
+### Module 5: Malware Development Concepts
+- Payload generation
+- Reverse shells vs bind shells
+- Persistence mechanisms
+- Evasion techniques
+- **Language application**: Python, C, PowerShell
+
+### Module 6: Post-Exploitation
+- Lateral movement
+- Credential dumping
+- Pivoting
+- Covering tracks
+- **Language application**: Bash/PowerShell, Python
+
+### Module 7: Mobile Security
+- Android architecture
+- APK reverse engineering
+- iOS security considerations
+- Mobile malware analysis
+- **Language application**: Java for Android, Objective-C/Swift basics
+
+### Module 8: Reverse Engineering
+- Disassemblers and debuggers
+- Static analysis
+- Dynamic analysis
+- Malware unpacking
+- **Language application**: Assembly, C, Python
+
+### Module 9: Defense & Detection
+- Signature development
+- Behavior analysis
+- Log monitoring
+- Incident response
+- **Language application**: Python for detection tools, YARA rules
+
+---
+
+## 🛠️ Tools & Frameworks
+
+### Installed on Kali Linux (Attacker Machine)
+- **Nmap** - Network scanning
+- **Metasploit Framework** - Exploitation
+- **Burp Suite** - Web proxy
+- **John the Ripper** - Password cracking
+- **Wireshark** - Packet analysis
+- **GDB** - Debugging
+- **Ghidra** - Reverse engineering
+- **IDA Pro Free** - Disassembler
+- **sqlmap** - SQL injection automation
+- **BeEF** - Browser exploitation
+
+### Custom Tools (Developed Here)
+- **Port Scanner Pro** - Multi-threaded Python scanner
+- **Payload Factory** - Generate test payloads in multiple languages
+- **Log Monitor** - Real-time log analysis for defense
+- **Lab Orchestrator** - Manage VM states and snapshots
+
+---
+
+## 📋 Prerequisites
+
+### Technical Prerequisites
+- **Basic programming knowledge** in at least one language
+- **Understanding of networking fundamentals** (TCP/IP, OSI model)
+- **Familiarity with operating systems** (Windows and Linux basics)
+- **Command line proficiency** (both Windows and Linux)
+
+### Hardware Requirements
+- Minimum 16GB RAM (32GB recommended)
+- 100GB free disk space for VMs
+- Virtualization enabled in BIOS
+- Internet connection for downloading tools
+
+### Software Requirements
+- VirtualBox or VMware
+- Git
+- Python 3.8+
+- GCC compiler
+- JDK 11+
+- Android Studio (for mobile testing)
+
+### Mindset Prerequisites
+- **Patience** — This is a marathon, not a sprint
+- **Curiosity** — Always ask "why" and "how"
+- **Ethical compass** — Strong internal boundaries
+- **Documentation habit** — Write everything down
+
+---
+
+## 🚀 Getting Started
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/yourusername/offensive-security-lab.git
+cd offensive-security-lab
+```
+
+### Step 2: Review the Ethics Documentation
+Start here. Seriously.
+```bash
+cat docs/ethics/legal-boundaries.md
+cat docs/ethics/responsible-disclosure.md
+```
+
+### Step 3: Set Up Your Lab Environment
+Follow the detailed lab setup guide:
+```bash
+cat docs/lab-setup/virtualbox-network-setup.md
+```
+
+### Step 4: Take Initial Snapshots
+Before any testing, snapshot your clean VMs:
+```bash
+./scripts/snapshot-all-vms.sh clean-state
+```
+
+### Step 5: Start with Basic Modules
+Begin your learning journey:
+1. Start with Python network scanning
+2. Move to JavaScript XSS basics
+3. Progress to SQL injection
+4. Advance to system exploitation
+
+---
+
+## 🛡️ Safety Protocols
+
+### Golden Rules
+1. **NEVER** test on systems you don't own
+2. **ALWAYS** use isolated networks
+3. **ALWAYS** snapshot VMs before testing
+4. **NEVER** share exploit code publicly without context
+5. **ALWAYS** document your findings defensively
+
+### Lab Safety Checklist
+- [ ] Target VMs have no internet access
+- [ ] Host machine has firewall enabled
+- [ ] All VMs are on isolated host-only network
+- [ ] Snapshots taken before each new test
+- [ ] No sensitive data in VMs
+- [ ] Lab network cannot reach production network
+
+### Emergency Procedures
+If you accidentally:
+- **Compromise host machine**: Immediately disconnect from network, document incident, rebuild
+- **Access unauthorized system**: Stop immediately, document, contact relevant authorities if required
+- **Lose VM snapshot**: Restore from backup, document what went wrong
+
+---
+
+## 📝 Documentation Standards
+
+All code and findings must be documented with:
+
+### For Exploit Code
+```python
+"""
+MODULE: Reverse Shell Payload
+PURPOSE: Educational demonstration of reverse shell mechanics
+LANGUAGE: Python 3.8+
+LAB USE ONLY: Must only run on authorized targets
+
+ETHICAL CONSIDERATIONS:
+- Demonstrates how attackers establish footholds
+- Understanding this helps defenders detect similar traffic
+- Never use without authorization
+
+DEFENSIVE INSIGHTS:
+- Monitor for outbound connections on unusual ports
+- Implement egress filtering
+- Use behavioral analysis to detect shell activity
+
+HOW IT WORKS:
+1. Client connects to specified IP and port
+2. Spawns interactive shell
+3. Redirects I/O over network socket
+
+MITIGATIONS:
+- Network segmentation
+- Application whitelisting
+- Outbound connection monitoring
+"""
+```
+
+### For Write-Ups
+Each technical analysis must include:
+- **Attack description** and mechanics
+- **Code walkthrough** (if applicable)
+- **Detection methods** for defenders
+- **Prevention strategies**
+- **Lessons learned**
+
+---
+
+## 🤝 Contributing
+
+This is a personal learning repository, but if you're interested in collaborating:
+
+### Contribution Guidelines
+1. **All contributions must include ethical disclaimers**
+2. **No live exploit code** without defensive context
+3. **Focus on detection and prevention** alongside attack techniques
+4. **Document everything thoroughly**
+
+### How to Contribute
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/defensive-tool`)
+3. Commit your changes with clear messages
+4. Push to your fork
+5. Open a Pull Request
+
+---
+
+## 📚 Recommended Resources
+
+### Books
+- **"The Web Application Hacker's Handbook"** by Stuttard & Pinto
+- **"Hacking: The Art of Exploitation"** by Jon Erickson
+- **"Practical Malware Analysis"** by Michael Sikorski
+- **"Penetration Testing: A Hands-On Introduction"** by Georgia Weidman
+- **"Metasploit: The Penetration Tester's Guide"** by Kennedy et al.
+
+### Online Courses
+- **eLearnSecurity** - Penetration testing certifications
+- **Offensive Security** - OSCP, OSWP certifications
+- **SANS** - Security training (expensive but comprehensive)
+- **Cybrary** - Free security courses
+- **PortSwigger Web Security Academy** - Free web app testing labs
+
+### Practice Platforms
+- **HackTheBox** - Legal penetration testing practice
+- **TryHackMe** - Beginner-friendly security rooms
+- **PentesterLab** - Hands-on exercises
+- **Root-Me** - Challenge-based learning
+- **OverTheWire** - War games for security
+
+### Communities
+- **r/netsec** - Professional security discussions
+- **r/AskNetsec** - Questions and answers
+- **OWASP** - Web application security community
+- **DEFCON Groups** - Local security meetups
+
+---
+
+## 🙏 Acknowledgments
+
+- **The information security community** for endless knowledge sharing
+- **Offensive Security** for pioneering hands-on security education
+- **Rapid7** for Metasploit and community tools
+- **All the developers** of vulnerable VMs and training platforms
+- **Every security researcher** who responsibly discloses vulnerabilities
+
+---
+
+## 📄 License
+
+This work is licensed under a **Creative Commons Attribution-NonCommercial 4.0 International License**.
+
+### You are free to:
+- **Share** — copy and redistribute the material in any medium or format
+- **Adapt** — remix, transform, and build upon the material
+
+### Under the following terms:
+- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made
+- **NonCommercial** — You may not use the material for commercial purposes
+- **No additional restrictions** — You may not apply legal terms that restrict others from doing anything the license permits
+
+### Full License Text
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+---
+
+## 📞 Contact & Responsible Disclosure
+
+**This repository is for educational purposes only. I do not provide hacking services, nor do I assist with unauthorized access to systems.**
+
+If you discover a security vulnerability through your own research and need guidance on responsible disclosure, I'm happy to point you to resources.
+
+For questions about this repository: [Create an issue](https://github.com/yourusername/offensive-security-lab/issues)
+
+---
+
+## 🔐 Final Words
+
+> *"The phrase 'offensive security' is often misunderstood. It's not about being aggressive or malicious. It's about proactively identifying weaknesses before the bad guys do. It's about understanding the art of war so you can better maintain the peace."*
+
+This repository represents thousands of hours of learning, failing, trying again, and eventually understanding. Every line of code here was written with one goal: to make the digital world a little bit safer.
+
+If you're reading this and considering a career in security, welcome. We need more ethical, curious minds. The learning curve is steep, but the community is supportive, and the mission is worthwhile.
+
+**Stay curious. Stay ethical. Stay legal.**
+
+*— A fellow security student*
+
+---
+
+**Version**: 1.0.0
+**Last Updated**: February 2026
+**Status**: Active Learning
+
+---
+
+*This README will evolve as the repository grows. Check back for updates.*
