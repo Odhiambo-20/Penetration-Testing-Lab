@@ -1,0 +1,7 @@
+IP,Port,Service,Version,Banner,OS,Vulnerabilities
+45.33.32.156,22,ssh,2.0,"SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.13
+Protocol mismatch.",Linux/Unix,None
+45.33.32.156,80,http,1.1,"HTTP/1.1 200 OK
+Date: Fri, 13 Feb 2026 14:19:59 GMT
+Server: Apache/2.4.7 (Ubuntu)
+Accept-Ranges: ",Linux/Unix,None

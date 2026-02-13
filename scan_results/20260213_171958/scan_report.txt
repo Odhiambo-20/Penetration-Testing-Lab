@@ -1,0 +1,28 @@
+
+NETWORK RECONNAISSANCE REPORT
+============================================================
+Scan ID: 20260213_171958
+Date: 2026-02-13 17:20:03
+Target: scanme.nmap.org
+
+EXECUTIVE SUMMARY
+============================================================
+Scan Duration: 4.35 seconds
+Hosts Scanned: 1
+Live Hosts Found: 1
+Total Open Ports: 2
+
+DETAILED FINDINGS
+============================================================
+
+Host: 45.33.32.156
+OS: Linux/Unix (Accuracy: 60%)
+----------------------------------------
+PORT     SERVICE         VERSION         VULNERABILITIES
+----------------------------------------
+22       ssh             2.0             None
+80       http            1.1             None
+
+============================================================
+End of Report
+============================================================

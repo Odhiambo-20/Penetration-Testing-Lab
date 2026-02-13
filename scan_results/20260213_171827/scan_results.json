@@ -1,0 +1,28 @@
+{
+    "scan_id": "20260213_171827",
+    "timestamp": "2026-02-13T17:18:31.003120",
+    "target": "192.168.1.0/24",
+    "configuration": {
+        "ports": [
+            22,
+            80,
+            443,
+            3389
+        ],
+        "threads": 100,
+        "timeout": 1.0
+    },
+    "statistics": {
+        "start_time": "2026-02-13T17:18:27.812944",
+        "end_time": "2026-02-13T17:18:31.002987",
+        "total_hosts": 254,
+        "hosts_up": 1,
+        "ports_scanned": 4,
+        "open_ports_found": 0,
+        "scan_duration": 3.19
+    },
+    "open_ports": {},
+    "service_versions": {},
+    "os_detections": {},
+    "vulnerabilities": {}
+}
