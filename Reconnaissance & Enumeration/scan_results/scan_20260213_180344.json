@@ -1,0 +1,60 @@
+{
+  "scan_id": "20260213_180344",
+  "timestamp": "2026-02-13T18:03:44.417349",
+  "duration": 1271.058053,
+  "target": "192.168.1.0/24",
+  "statistics": {
+    "total_hosts": 254,
+    "hosts_up": 1,
+    "ports_scanned": 0,
+    "open_ports": 2
+  },
+  "hosts": [
+    {
+      "ip": "192.168.1.1",
+      "hostname": "",
+      "mac": "",
+      "vendor": "",
+      "os": {
+        "os": "Linux/Unix",
+        "accuracy": 40,
+        "ttl": 63,
+        "window": null,
+        "df": null,
+        "tos": null,
+        "methods_used": [
+          "ttl"
+        ],
+        "details": {
+          "ttl_guess": "Unix/Linux family (TTL \u2264 64)"
+        }
+      },
+      "services": [
+        {
+          "port": 53,
+          "protocol": "tcp",
+          "state": "open",
+          "service": "unknown",
+          "product": "",
+          "version": "",
+          "banner": "",
+          "confidence": 0.1,
+          "category": "unknown",
+          "vulnerabilities": []
+        },
+        {
+          "port": 53,
+          "protocol": "tcp",
+          "state": "open",
+          "service": "unknown",
+          "product": "",
+          "version": "",
+          "banner": "",
+          "confidence": 0.1,
+          "category": "unknown",
+          "vulnerabilities": []
+        }
+      ]
+    }
+  ]
+}

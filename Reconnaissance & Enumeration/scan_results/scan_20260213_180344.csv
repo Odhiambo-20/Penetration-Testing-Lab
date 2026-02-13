@@ -1,0 +1,3 @@
+IP,Hostname,Port,Protocol,State,Service,Product,Version,Category,Confidence,Vulnerabilities,OS
+192.168.1.1,,53,tcp,open,unknown,,,unknown,0.10,0,Linux/Unix
+192.168.1.1,,53,tcp,open,unknown,,,unknown,0.10,0,Linux/Unix

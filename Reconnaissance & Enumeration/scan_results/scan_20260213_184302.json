@@ -1,0 +1,13 @@
+{
+  "scan_id": "20260213_184302",
+  "timestamp": "2026-02-13T18:43:02.692521",
+  "duration": 254.566348,
+  "target": "192.168.1.100-150",
+  "statistics": {
+    "total_hosts": 51,
+    "hosts_up": 0,
+    "ports_scanned": 0,
+    "open_ports": 0
+  },
+  "hosts": []
+}
