@@ -1,0 +1,28 @@
+
+NETWORK RECONNAISSANCE REPORT
+============================================================
+Scan ID: 20260213_172234
+Date: 2026-02-13 17:22:39
+Target: 192.168.1.0/24
+
+EXECUTIVE SUMMARY
+============================================================
+Scan Duration: 5.24 seconds
+Hosts Scanned: 254
+Live Hosts Found: 1
+Total Open Ports: 2
+
+DETAILED FINDINGS
+============================================================
+
+Host: 192.168.1.1
+OS: unknown (Accuracy: 0%)
+----------------------------------------
+PORT     SERVICE         VERSION         VULNERABILITIES
+----------------------------------------
+21       unknown         unknown         None
+53       unknown         unknown         None
+
+============================================================
+End of Report
+============================================================

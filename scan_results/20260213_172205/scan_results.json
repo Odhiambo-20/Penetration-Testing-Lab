@@ -1,0 +1,52 @@
+{
+    "scan_id": "20260213_172205",
+    "timestamp": "2026-02-13T17:22:06.295013",
+    "target": "192.168.1.1",
+    "configuration": {
+        "ports": [
+            53,
+            161,
+            500
+        ],
+        "threads": 100,
+        "timeout": 1.0
+    },
+    "statistics": {
+        "start_time": "2026-02-13T17:22:05.105111",
+        "end_time": "2026-02-13T17:22:06.294907",
+        "total_hosts": 1,
+        "hosts_up": 1,
+        "ports_scanned": 3,
+        "open_ports_found": 1,
+        "scan_duration": 1.19
+    },
+    "open_ports": {
+        "192.168.1.1": {
+            "53": ""
+        }
+    },
+    "service_versions": {
+        "192.168.1.1": {
+            "53": {
+                "port": 53,
+                "protocol": "tcp",
+                "banner": "",
+                "service": "unknown",
+                "version": "unknown",
+                "cpe": null,
+                "confidence": "low"
+            }
+        }
+    },
+    "os_detections": {
+        "192.168.1.1": {
+            "os": "Linux/Unix",
+            "accuracy": 60,
+            "ttl": 63,
+            "tcp_options": null
+        }
+    },
+    "vulnerabilities": {
+        "192.168.1.1": {}
+    }
+}
